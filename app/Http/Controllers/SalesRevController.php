@@ -1,0 +1,571 @@
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+
+use App\Expenses;
+use App\Sales;
+use PDF;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+//use Auth;
+
+class SalesRevController extends Controller
+{
+    public function showSales(){
+      $sales = Sales::paginate(20);
+      return view('sales', compact('sales'));
+    }
+
+    public function showExpenses(){
+        $expenses = Expenses::paginate(20);
+        // $expenses["sum"] = Expenses::get()->sum("total");
+        // ->select(DB::raw("SUM(expenses_totalamount) as expenses_totalamount"))
+        // ->get();
+        
+        return view('layout.2expensesMonth', [
+          'expenses' => $expenses,
+          'expenses_totalamount' => $expenses->sum('expenses_totalamount')
+        ]);
+      }
+
+///////SHOW BY MONTH///////////////////////////////////////////////////////////////////
+
+public function showExpByMonth(){
+  $title = 'Bulanan';
+  return view('layout.expByMonth')->with('title', $title);
+  }
+
+public function showSalByMonth(){
+  $title = 'Bulanan';
+  return view('layout.salByMonth')->with('title', $title);
+  }
+  
+
+///////////EXPENSES BY MONTH///////////////////////////////////////////////////////////
+
+public function showJanExpenses(){
+      // $expenses = Expenses::query()->first()
+      //   ->whereMonth('expenses_date', '1')
+      //   ->get();
+      // return view('expensesMonth', compact('expenses'));
+
+      // if($expenses){
+      //   echo "--Tiada perbelanjaan untuk dipaparkan--";
+      // }
+
+      $expenses = Expenses::whereMonth('expenses_date', '1'); // model or null
+        if (!$expenses) {
+          return redirect('/expsalmonth');
+        }
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showFebExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '2')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showMarExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '3')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showAprExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '4')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showMayExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '5')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showJuneExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '6')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showJulyExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '7')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showAugExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '8')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      
+      if(!$expenses){
+        echo "--Tiada perbelanjaan untuk dipaparkan--";
+      }
+      
+    }
+
+    //   if (Expense::whereMonth('expenses_date', '=', '8')->exists()) {
+    //     return view('expensesMonth', compact('expenses'));
+    //  }
+    
+
+  //    if (Expenses::where('email', Input::get('email'))->exists()) {
+  //     return view('expensesMonth', compact('expenses'));
+  // }
+
+public function showSeptExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '9')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showOctExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '10')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showNovExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '11')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+public function showDecExpenses(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '12')
+        ->get();
+      return view('layout.expMonth', compact('expenses'));
+      }
+
+
+
+//////////////SALES BY MONTH//////////////////////////////////////////////////////////
+
+public function showJanSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '1')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showFebSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '2')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showMarSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '3')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showAprSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '4')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showMaySales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '5')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showJuneSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '6')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showJulySales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '7')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showAugSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '8')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showSeptSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '9')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showOctSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '10')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showNovSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '11')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+public function showDecSales(){
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '12')
+        ->get();
+      return view('layout.salMonth', compact('sales'));
+      }
+
+
+///////////////////////////// PDF SALES /////////////////////////////////////////////////////////
+    public function createPDFSales() {
+      // retreive all records from db
+      $sales = Sales::all();
+
+      // share data to view
+      view()->share('sales',$sales);
+      $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+
+      // download PDF file with download method
+      return $pdf->stream('sales.pdf');
+
+      // return $pdf->download('pdf_file.pdf');
+      // $pdf = PDF::loadView('email.sample', $data)->setPaper('letter', 'landscape')->save(public_path($path));
+      //   return $pdf->stream("Halloa.pdf");
+    }
+
+    public function salJanPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '1')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salFebPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '2')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salMarPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '3')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salAprPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '4')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salMayPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '5')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salJunePDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '6')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salJulyPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '7')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salAugPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '8')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salSeptPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '9')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salOctPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '10')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salNovPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '11')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+    public function salDecPDF() {
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '12')
+        ->get();        
+        view()->share('sales',$sales);
+        $pdf = PDF::loadView('pdf-sales.pdf_viewSales', $sales);
+      return $pdf->stream('sales.pdf');
+    }
+
+
+//////////////////////////////// PDF EXPENSES //////////////////////////////////////////////////////
+
+  public function createPDFExpenses() {
+    // retreive all records from db
+    $expenses = Expenses::all();
+
+    // share data to view
+    view()->share('expenses',$expenses);
+    $pdf = PDF::loadView('pdf_viewExp', $expenses);
+
+    // download PDF file with download method
+    return $pdf->stream('expenses.pdf');
+
+    // return $pdf->download('pdf_file.pdf');
+    // $pdf = PDF::loadView('email.sample', $data)->setPaper('letter', 'landscape')->save(public_path($path));
+    //   return $pdf->stream("Halloa.pdf");
+  }
+
+    public function expJanPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '1')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+    
+    public function expFebPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '2')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expMarPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '3')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expAprPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '4')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expMayPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '5')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expJunePdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '6')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expJulyPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '7')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expAugPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '8')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expSeptPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '9')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expOctPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '10')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expNovPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '11')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+    public function expDecPdf(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '12')
+        ->get(); // model or null
+
+        if (!$expenses) {
+          return redirect('/testing');
+        }
+        view()->share('expenses',$expenses);
+        $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
+      
+        return $pdf->stream('expenses.pdf');
+    }
+
+/////////////////////////////// CATEGORY //////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////// TESTING ////////////////////////////////////////////////////////////
+
+public function testAugExpenses(){
+  $expenses = Expenses::query()
+    ->whereMonth('expenses_date', '8')
+    ->get();
+  return view('layout.expMonth', compact('expenses'));
+  }
+
+
+
+}
