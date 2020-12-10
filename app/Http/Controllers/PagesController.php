@@ -35,7 +35,7 @@ class PagesController extends Controller
         return view('dashboard')->with('title', $title);
     }
 
-    public function testing(){
+    public function newDashboard(){
         return view ('layout.app');
     }
 

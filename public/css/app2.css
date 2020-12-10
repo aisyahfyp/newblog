@@ -46,6 +46,13 @@ body {
   .header__search {
     margin-left: 42px;
   }
+
+  .header__avatar a {
+    padding: 8px;
+    background-color: #394263;
+    color: #ddd;
+    text-decoration: none;
+  }
   
   .sidenav {
     grid-area: sidenav;

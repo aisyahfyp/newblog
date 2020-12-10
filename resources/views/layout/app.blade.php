@@ -15,7 +15,9 @@
    
   <header class="header">
     <div class="header__search">SISTEM LAPORAN PERBELANJAAN</div>
-    
+    <div class="header__avatar">
+      <a href="/logout">Log Keluar</a>
+    </div>
   </header>
 
   <aside class="sidenav">
