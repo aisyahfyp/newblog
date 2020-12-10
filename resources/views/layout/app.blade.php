@@ -30,6 +30,7 @@
       <li class="sidenav__list-item"><a href="/expmonth">Perbelanjaan</a></li>
       <li class="sidenav__list-item"><a href="/salmonth">Jualan</a></li>
       <li class="sidenav__list-item"><a href="/inventori">Inventori</a></li>
+      <li class="sidenav__list-item"><a href="#">Tambahan</a></li>
       
     </ul>
   </aside>
