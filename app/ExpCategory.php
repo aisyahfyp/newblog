@@ -5,6 +5,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExpCategory extends Model {
 
-    public $table = "stock_category";
+    public $table = "expenses_category";
 
 }

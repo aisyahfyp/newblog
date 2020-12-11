@@ -61,8 +61,9 @@ Route::group(['middleware' => 'preventBackHistory'], function()
 });
 
 
-Route::get('/testing', 'PagesController@testing');
-//Route::get('/testing2', 'PagesController@testingexp');
+Route::get('/testing', 'PagesController@addCategory');
+Route::post('/testing/add', 'PagesController@addExp')->name('exp.add');
+
 Route::get('/chart', 'ChartController@testChart');
 
 

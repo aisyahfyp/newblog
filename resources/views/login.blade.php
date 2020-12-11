@@ -87,18 +87,18 @@
    @endif
 
    <form method="post" action="{{ url('/login') }}">
-    {{ csrf_field() }}
-    <div class="form-group">
-     <label>Nama</label>
-     <input type="username" name="username" class="form-control" />
-    </div>
-    <div class="form-group">
-     <label>Kata Laluan</label>
-     <input type="password" name="password" class="form-control" />
-    </div>
-    <div class="form-group">
-     <input type="submit" name="login" class="btn btn-primary" value="Login" />
-    </div>
+        {{ csrf_field() }}
+        <div class="form-group">
+        <label>Nama</label>
+        <input type="username" name="username" class="form-control" />
+        </div>
+        <div class="form-group">
+        <label>Kata Laluan</label>
+        <input type="password" name="password" class="form-control" />
+        </div>
+        <div class="form-group">
+        <input type="submit" name="login" class="btn btn-primary" value="Login" />
+        </div>
    </form>
   </div>
  </body>

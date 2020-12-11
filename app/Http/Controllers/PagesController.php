@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Inventory;
+use App\ExpCategory;
+use App\Expenses;
+use Session;
 //use Auth;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 //use Illuminate\Support\Facades\Auth;
@@ -39,8 +42,8 @@ class PagesController extends Controller
         return view ('layout.app');
     }
 
-    public function testingexp(){
-        return view ('layout.2expensesMonth');
+    public function testing(){
+        return view ('layout.add');
     }
 
     public function expMonth(){
@@ -91,6 +94,42 @@ class PagesController extends Controller
         return view('inventory', ['data'=>$inventory]);
         // return view('inventory')->with('title', $title);
     }
+
+    public function addCategory(){
+        $category=ExpCategory::all();
+        return view('layout.add', compact('category'));
+    }
+
+    public function addExp(Request $request){
+        $this->validate($request, array(
+            'expenses_date'     =>  'required',
+            'expcategory_id'    =>  'required',
+            'expenses_amount'   =>  'required',
+            'expenses_quantity' =>  'required',
+        ));
+
+        $exp = Expenses::create([
+            'expenses_date'     =>  date('Y-m-d'),
+            'expcategory_id'    =>  $request->expcategory_id,
+            'expenses_amount'   =>  $request->expenses_amount,
+            'expenses_quantity' =>  $request->expenses_quantity,
+        ]);   
+        $exp->save();
+        
+        Session::flash('success', 'BERJAYA!');
+        return redirect('/testing');
+        //$exp = new Expenses;
+        // $exp->expenses_date = $request->expenses_date;
+        // $exp = $request->all();
+        //$exp->expenses_date = date('Y-m-d');
+        //$exp->expcategory_id = $request->expcategory_id;
+        //$exp->expenses_amount = $request->expenses_amount;
+        //$exp->expenses_quantity = $request->expenses_quantity;
+        
+        // $exp->save();
+        // return redirect('/testing');
+    }
+
 }
 
      
