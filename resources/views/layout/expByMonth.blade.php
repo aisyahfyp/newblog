@@ -122,7 +122,12 @@
             <a href="expdf12">Cetak</a>
         </div>
       </div>
-      
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Tambah Perbelanjaan</div>
+        <div class="overviewcard__info">
+            <a href="/expmonth-add">Tambah</a>
+        </div>
+      </div>
     </div>
 
   </main>

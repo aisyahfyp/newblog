@@ -3,7 +3,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>     
+{{-- DATEPICKER --}}
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>      --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet" type="text/css" />
+
+{{-- TOTAL AMOUNT --}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 {{-- <script type="text/javascript" src="{{ URL::asset('js/app2.js') }}"></script> --}}
 
 <link rel="stylesheet" type="text/css" href="css/app2.css">
@@ -30,7 +37,7 @@
       <li class="sidenav__list-item"><a href="/expmonth">Perbelanjaan</a></li>
       <li class="sidenav__list-item"><a href="/salmonth">Jualan</a></li>
       <li class="sidenav__list-item"><a href="/inventori">Inventori</a></li>
-      <li class="sidenav__list-item"><a href="#">Tambahan</a></li>
+      {{-- <li class="sidenav__list-item"><a href="#">Tambahan</a></li> --}}
       
     </ul>
   </aside>
@@ -56,62 +63,41 @@
 
     <div class="main-cards">
       <div class="card-exp-sales">
-        <h3>Tambah Perbelanjaan</h3>
-         <form action="{{ route('exp.add') }}" method="POST">
+        <h3>Tambah Jualan</h3>
+        <form action="{{ route('sal.add') }}" method="POST">
          @csrf
-         <ul class="flex-outer">
-            <li>
-                <label for="expcategory">Kategori</label>
-                    <select class="expcategory" id="expcategory" name="expcategory_id">
-                        @foreach ($category as $value)
-                            <option value="{{$value->expcategory_id}}">{{ $value->expcategory_name }}</option>
-                        @endforeach
-                    </select>
-            </li>
+            <ul class="flex-outer">
+
+            @if(count($errors) > 0)
+            <div class="alert alert-danger">
+              <ul>
+                @foreach($errors->all() as $error)
+                  <li>{{$error}}</li>
+                @endforeach
+              </ul>
+            </div>
+          @endif
+
+            @if(\Session::has('success'))
+            <div class="alert alert-success">
+            <p>{{\Session::get('success')}}</p>
+            </div>
+            @endif
+
             <li>
                 <label for="exp-date">Tarikh</label>
                 {{-- <input type="exp-date" name="expenses_date" id="add-exp-date" placeholder="Tarikh"> --}}
-                <div class='input-group date' name='expenses_date' id='datetimepicker'>
-                  <input type='expenses_date' class="form-control" />
-                  <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-time"></span>
-                  </span>
-                </div>
+                <input type="date" name="sales_date" id="datepicker" class="from-control" placeholder="Tarikh">
             </li>
-            <li>
-                <label for="exp-amount">Perbelanjaan</label>
-                <input type="expenses_amount" name="expenses_amount" id="add-exp-amount" placeholder="Jumlah Perbelanjaan">
-            </li>
-            <li>    
-                <label for="exp-quantity">Kuantiti</label>
-                <input type="expenses_quantity" name="expenses_quantity" id="add-exp-quantity" placeholder="Kuantiti">
-            </li>
-
-            <li>
-                <button type="submit" name="submit">Tambah</button>
-            </li>
-        </ul>
-        </form>
-            <script type="text/javascript">
-                  $(function () {
-                  $('#datetimepicker').datetimepicker({
-                      format: 'LT'
-                  });
-              });
-            </script>
-      </div>
-      
-      <div class="card-exp-sales">
-        <h3>Tambah Jualan</h3>
-            <ul class="flex-outer">
             <li>
                 <label for="add-sales">Jualan</label>
-                <input type="text" id="add-sales" placeholder="Jumlah Jualan">
+                <input type="int" name="sales_amount" id="add-sales" placeholder="Jumlah Jualan">
             </li>
             <li>
                 <button type="submit" name="submit">Tambah</button>
             </li>
-        </ul>
+          </ul>
+        </form>
       </div>
     </div>
   </main>

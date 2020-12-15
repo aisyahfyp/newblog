@@ -97,7 +97,11 @@ class PagesController extends Controller
 
     public function addCategory(){
         $category=ExpCategory::all();
-        return view('layout.add', compact('category'));
+        return view('layout.addExp', compact('category'));
+    }
+
+    public function showAddSales(){
+        return view('layout.addSales');
     }
 
     public function addExp(Request $request){
@@ -106,28 +110,44 @@ class PagesController extends Controller
             'expcategory_id'    =>  'required',
             'expenses_amount'   =>  'required',
             'expenses_quantity' =>  'required',
+            //'expenses_totalamount' => 'required',
         ));
 
-        $exp = Expenses::create([
-            'expenses_date'     =>  date('Y-m-d'),
-            'expcategory_id'    =>  $request->expcategory_id,
-            'expenses_amount'   =>  $request->expenses_amount,
-            'expenses_quantity' =>  $request->expenses_quantity,
-        ]);   
-        $exp->save();
+        // $exp = Expenses::insert([
+        //     'expenses_date'     =>  $request->expenses_date,
+        //     'expcategory_id'    =>  $request->expcategory_id,
+        //     'expenses_amount'   =>  $request->expenses_amount,
+        //     'expenses_quantity' =>  $request->expenses_quantity,
+        //     'expenses_totalamount' => setTotal(),
+        // ]);   
         
-        Session::flash('success', 'BERJAYA!');
-        return redirect('/testing');
-        //$exp = new Expenses;
-        // $exp->expenses_date = $request->expenses_date;
-        // $exp = $request->all();
-        //$exp->expenses_date = date('Y-m-d');
-        //$exp->expcategory_id = $request->expcategory_id;
-        //$exp->expenses_amount = $request->expenses_amount;
-        //$exp->expenses_quantity = $request->expenses_quantity;
+        //$exp->save();
         
-        // $exp->save();
+        // Session::flash('success', 'BERJAYA!');
         // return redirect('/testing');
+        $exp = new Expenses();
+        $exp->expenses_date = $request->input('expenses_date');
+        $exp->expcategory_id = $request->input('expcategory_id');
+        $exp->expenses_amount = $request->input('expenses_amount');
+        $exp->expenses_quantity = $request->input('expenses_quantity');
+        $exp->setExpTotal();
+        $exp->save();
+        return redirect('/expmonth-add')->with('success', 'Perbelanjaan Direkodkan!');
+    }
+
+    public function addSales(Request $request){
+        $this->validate($request, array(
+            'sales_date'     =>  'required',
+            'sales_amount'   =>  'required',
+            //'sales_totalamount' => 'required',
+        ));
+
+        $sales = new Sales();
+        $sales->sales_date = $request->input('sales_date');
+        $sales->sales_amount = $request->input('sales_amount');
+        $exp->setSalTotal();
+        $exp->save();
+        return redirect('/salmonth-add')->with('success', 'Jualan Direkodkan!');
     }
 
 }

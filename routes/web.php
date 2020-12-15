@@ -61,8 +61,7 @@ Route::group(['middleware' => 'preventBackHistory'], function()
 });
 
 
-Route::get('/testing', 'PagesController@addCategory');
-Route::post('/testing/add', 'PagesController@addExp')->name('exp.add');
+
 
 Route::get('/chart', 'ChartController@testChart');
 
@@ -156,6 +155,13 @@ Route::get('/salpdf12', 'SalesRevController@salDecPdf');
 
 ////////TESTING///////////
 Route::get('/test1', 'InventoryController@showMonthInventory');
+
+
+Route::get('/expmonth-add', 'PagesController@addCategory');
+Route::post('/expmonth/save', 'PagesController@addExp')->name('exp.add');
+
+Route::get('/salmonth-add', 'PagesController@showAddSales');
+Route::post('/salmonth/save', 'PagesController@addSales')->name('sal.add');
 
 
 // Route::get('/', 'EmployeeController@showEmployees');

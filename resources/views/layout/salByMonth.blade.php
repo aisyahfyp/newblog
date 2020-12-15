@@ -122,7 +122,14 @@
             <a href="/salpdf12">Cetak</a>
         </div>
       </div>
-      
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Tambah Jualan</div>
+        <div class="overviewcard__info">
+            <a href="/salmonth-add">Tambah</a>
+        </div>
+      </div>
+
+
     </div>
 
   </main>
