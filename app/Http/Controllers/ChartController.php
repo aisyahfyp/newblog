@@ -87,7 +87,7 @@ class ChartController extends Controller
         ->whereMonth('expenses_date', '8')
         ->get();
 
-      return view("dashboard", compact("sales", "expenses"));
+      return view("layout.app", compact("sales", "expenses"));
     }
 
 }

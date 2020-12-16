@@ -57,7 +57,7 @@ Route::group(['middleware' => 'preventBackHistory'], function()
 {
     //  Route::get('dashboard', 'DashboardController@dashboard');
     //  Route::get('/dashboard', 'ChartController@testChart')->name('dashboard');
-     Route::get('/dashboard', 'PagesController@newDashboard')->name('dashboard');
+     Route::get('/dashboard', 'ChartController@testChart')->name('dashboard');
 });
 
 
