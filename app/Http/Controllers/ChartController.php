@@ -8,6 +8,7 @@ use App\Inventory;
 use App\StockCategory;
 use App\Expenses;
 use App\Sales;
+use App\Chart;
 
 //use DB;
 
@@ -79,16 +80,38 @@ class ChartController extends Controller
 
       //$sales = Sales::all();
       //$expenses = Expenses::all();
-      $sales = Sales::query()
+      $sales = DB::table('sales')
         ->whereMonth('sales_date', '8')
-        ->get();
-        
-      $expenses = Expenses::query()
-        ->whereMonth('expenses_date', '8')
-        ->get();
+        ->get()
+        ->sum('sales_amount');
 
-      return view("layout.app", compact("sales", "expenses"));
+      $expenses = DB::table('expenses')
+        ->whereMonth('expenses_date', '8')
+        ->get()
+        ->sum('expenses_totalamount');
+      //return response()->json($result);
+
+     // $test = Sales::pluck( 'sales_totalamount', 'sales_date');
+      //return $test->keys();
+      //return $test->values();
+
+
+      return view('layout.app', compact('sales', 'expenses'));
     }
 
+    public function testChart2(){
+      $groups = Expenses::pluck('expenses_totalamount', 'expenses_date');
+                
+          // Generate random colours for the groups
+          for ($i=0; $i<=count($groups); $i++) {
+                      $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
+                  }
+          // Prepare the data for returning with the view
+          $chart = new Chart;
+                  $chart->labels = (array_keys($groups));
+                  $chart->dataset = (array_values($groups));
+                  $chart->colours = $colours;
+          return view('layout.app', compact('chart'));
+    }
 }
 
