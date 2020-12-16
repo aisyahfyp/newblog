@@ -16,5 +16,6 @@ class Sales extends Model {
     public function setSalTotal() {
         
         $this->sales_totalamount = $this->sum('sales_amount');
+        
     }
 }
