@@ -8,7 +8,7 @@ use App\Inventory;
 use App\StockCategory;
 use App\Expenses;
 use App\Sales;
-use App\Chart;
+use ArielMejiaDev\LarapexCharts\LarapexChart;
 
 //use DB;
 
@@ -112,6 +112,30 @@ class ChartController extends Controller
                   $chart->dataset = (array_values($groups));
                   $chart->colours = $colours;
           return view('layout.app', compact('chart'));
+    }
+
+    public function testChart3(){
+      $chart = (new LarapexChart)->setTitle('Perbelanjaan Ogos')
+                ->setSubtitle('Ogos')
+                ->setType('bar')
+                ->setXAxis(['Jan', 'Feb', 'Mar'])
+                ->setGrid(false)
+                ->setDataset([
+                  [
+                      'name'  => 'Company A',
+                      'data'  =>  [500, 1000, 1900]
+                  ],
+                  [
+                      'name'  => 'Company B',
+                      'data'  => [300, 900, 1400]
+                  ],
+                  [
+                      'name'  => 'Company C',
+                      'data'  => [430, 245, 500]
+                  ]
+                  ])
+                ->setStroke(1);
+      return view('layout.app', compact('chart'));
     }
 }
 

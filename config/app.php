@@ -177,8 +177,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        //ArielMejiaDev\Package\LarapexChartsServiceProvider::class,
-
+        ArielMejiaDev\Package\LarapexChartsServiceProvider::class,
+        
     ],
 
     /*
@@ -234,7 +234,7 @@ return [
         // 'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         // 'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         // 'Input' => Illuminate\Support\Facades\Input::class,
-
+        
     ],
 
 ];

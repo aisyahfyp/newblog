@@ -9,6 +9,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>       
 {{-- <script type="text/javascript" src="{{ URL::asset('js/app2.js') }}"></script> --}}
 
+
 <link rel="stylesheet" type="text/css" href="css/app2.css">
 
  <div class="grid-container">
@@ -62,7 +63,9 @@
     <div class="main-cards">
       <div class="card">
         <h3>Perbelanjaan</h3>
-            <canvas id="chart"></canvas>
+          {!! $chart->container() !!}
+          <script src="{{ $chart->cdn() }}"></script>
+          {{ $chart->script() }}
 
       </div>
       <div class="card">
