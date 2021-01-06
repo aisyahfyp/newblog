@@ -1,4 +1,4 @@
-{{-- NEW DASHBOARD --}}
+{{-- TEST NEW DASHBOARD --}}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -10,9 +10,10 @@
 {{-- <script type="text/javascript" src="{{ URL::asset('js/app2.js') }}"></script> --}}
 
 <link href="{{asset('assets/css/components.min.css')}}" rel="stylesheet" type="text/css">	
-<script type="text/javascript" src="{{asset('assets/js/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script>
+
+{{-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> --}}
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/app2.css">
 
@@ -70,8 +71,10 @@
           {{-- {!! $chart->container() !!}
           <script src="{{ $chart->cdn() }}"></script>
           {{ $chart->script() }} --}}
-          <div class="chart has-fixed-height" id="bars_basic"></div>
-
+          {{-- <div class="chart has-fixed-height" id="bars_basic"></div> --}}
+          {{-- <div id="barchart1" style="width: 80%; height: 450px; display: block; margin: 0 auto;"></div> --}}
+          <div id="container"></div>
+      
       </div>
       <div class="card">
         <h3>Jualan</h3>
@@ -84,7 +87,7 @@
   <footer class="footer">
     <div class="footer__copyright">&copy; 2018 MTH</div>
     {{-- <div class="footer__signature">Made with love by pure genius</div> --}}
-  </footer>
+</footer>
 </div>
 
 
@@ -112,51 +115,65 @@
         sidenavCloseEl.on('click', function() {
         toggleClassName(sidenavEl, 'active');
         });
-</script>        
-{{-- <script type="text/javascript">
-var bars_basic_element = document.getElementById('bars_basic');
-if (bars_basic_element) {
-    var bars_basic = echarts.init(bars_basic_element);
-    bars_basic.setOption({
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            
-                type: 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['Ogos'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
+
+Highcharts.chart('container', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Monthly Average Rainfall'
+    },
+    subtitle: {
+        text: 'Source: WorldClimate.com'
+    },
+    xAxis: {
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
         ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        series: [
-            {
-                name: 'Expenses',
-                type: 'bar',
-                barWidth: '20%',
-                data: [
-                    {{$exp_count}},
-                ]
-            }
-        ]
-    });
-}
-</script> --}}
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Rainfall (mm)'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Tokyo',
+        data: [49.9, 71.5, 106.4]
+
+    }, {
+        name: 'New York',
+        data: [83.6, 78.8, 98.5]
+
+    }, {
+        name: 'London',
+        data: [48.9, 38.8, 39.3]
+
+    }, {
+        name: 'Berlin',
+        data: [42.4, 33.2, 34.5]
+
+    }]
+});
+
+</script>
+
 
 </html>

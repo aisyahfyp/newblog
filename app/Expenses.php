@@ -31,4 +31,6 @@ class Expenses extends Model {
         //   $exp = Expenses::where('')
         $this->expenses_totalamount = $this->expenses_amount * $this->expenses_quantity;
     }
+
+    
 }

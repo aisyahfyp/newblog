@@ -80,23 +80,28 @@ class ChartController extends Controller
 
       //$sales = Sales::all();
       //$expenses = Expenses::all();
-      $sales = DB::table('sales')
-        ->whereMonth('sales_date', '8')
-        ->get()
-        ->sum('sales_amount');
+      // $sales = DB::table('sales')
+      //   ->whereMonth('sales_date', '8')
+      //   ->get()
+      //   ->sum('sales_amount');
 
-      $expenses = DB::table('expenses')
-        ->whereMonth('expenses_date', '8')
-        ->get()
-        ->sum('expenses_totalamount');
+      // $expenses = DB::table('expenses')
+      //   ->whereMonth('expenses_date', '8')
+      //   ->get()
+      //   ->sum('expenses_totalamount');
       //return response()->json($result);
+
+      $expenses = Expenses::query()
+      ->whereMonth('expenses_date', '8')
+      ->where('expenses_totalamount')
+      ->get();
 
      // $test = Sales::pluck( 'sales_totalamount', 'sales_date');
       //return $test->keys();
       //return $test->values();
 
 
-      return view('layout.app', compact('sales', 'expenses'));
+      return view('layout.apptest', compact('expenses'));
     }
 
     public function testChart2(){
@@ -107,7 +112,7 @@ class ChartController extends Controller
                       $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
                   }
           // Prepare the data for returning with the view
-          $chart = new Chart;
+          $chart = new LarapexChart;
                   $chart->labels = (array_keys($groups));
                   $chart->dataset = (array_values($groups));
                   $chart->colours = $colours;
@@ -115,27 +120,31 @@ class ChartController extends Controller
     }
 
     public function testChart3(){
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '8')
+        ->where('expenses_totalamount')
+        ->get();
+
       $chart = (new LarapexChart)->setTitle('Perbelanjaan Ogos')
-                ->setSubtitle('Ogos')
+                ->setSubtitle('Perbelanjaan')
                 ->setType('bar')
-                ->setXAxis(['Jan', 'Feb', 'Mar'])
+                ->setXAxis(['Ogos'])
                 ->setGrid(false)
                 ->setDataset([
                   [
-                      'name'  => 'Company A',
-                      'data'  =>  [500, 1000, 1900]
-                  ],
-                  [
-                      'name'  => 'Company B',
-                      'data'  => [300, 900, 1400]
-                  ],
-                  [
-                      'name'  => 'Company C',
-                      'data'  => [430, 245, 500]
+                    'name'  =>  'Active Users',
+                    'data'  =>  []
                   ]
-                  ])
+                ])
+                  //Expenses::whereMonth('expenses_date', '=', '8'), Expenses::where('expenses_totalamount')]) 
                 ->setStroke(1);
       return view('layout.app', compact('chart'));
+    }
+
+    public function testChart4(Request $request){
+      $expensesMonth = Expenses::whereMonth('expenses_date','8')->get();
+    	$exp_count = count($expensesMonth);    	
+    	return view('layout.app', compact('exp_count'));
     }
 }
 
