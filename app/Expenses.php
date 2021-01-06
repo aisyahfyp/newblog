@@ -32,5 +32,4 @@ class Expenses extends Model {
         $this->expenses_totalamount = $this->expenses_amount * $this->expenses_quantity;
     }
 
-    
 }

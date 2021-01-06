@@ -8,7 +8,7 @@ use App\Inventory;
 use App\StockCategory;
 use App\Expenses;
 use App\Sales;
-use ArielMejiaDev\LarapexCharts\LarapexChart;
+
 
 //use DB;
 
@@ -66,56 +66,28 @@ class ChartController extends Controller
 
     public function testChart(){
 
-      // $expenses = Expenses::query()
-      // ->select('expenses.expenses_totalamount')
-      // ->sum('expenses_totalamount');
-      
-      
-      //$query2 = Sales::query()
-      // $sales = Sales::query()
-      // ->select('sales.sales_totalamount')
-      // ->sum('sales_totalamount')
-      //->union($expenses)
-      //->get();
-
-      //$sales = Sales::all();
-      //$expenses = Expenses::all();
-      // $sales = DB::table('sales')
-      //   ->whereMonth('sales_date', '8')
-      //   ->get()
-      //   ->sum('sales_amount');
-
-      // $expenses = DB::table('expenses')
-      //   ->whereMonth('expenses_date', '8')
-      //   ->get()
-      //   ->sum('expenses_totalamount');
-      //return response()->json($result);
-
       $expenses = Expenses::query()
-      ->whereMonth('expenses_date', '8')
-      ->where('expenses_totalamount')
-      ->get();
+        ->whereMonth('expenses_date', '8')
+        ->get();
 
-     // $test = Sales::pluck( 'sales_totalamount', 'sales_date');
-      //return $test->keys();
-      //return $test->values();
+      $sales = Sales::query()
+        ->whereMonth('sales_date', '8')
+        ->get();
 
-
-      return view('layout.apptest', compact('expenses'));
+      $results = array (DB::table('expenses')
+        ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
+        ->get('total_expenses')); 
+      
+       return view('layout.app', compact('expenses', 'sales', 'results'));
     }
+
+
+
+    
 
     public function testChart2(){
       $groups = Expenses::pluck('expenses_totalamount', 'expenses_date');
                 
-          // Generate random colours for the groups
-          for ($i=0; $i<=count($groups); $i++) {
-                      $colours[] = '#' . substr(str_shuffle('ABCDEF0123456789'), 0, 6);
-                  }
-          // Prepare the data for returning with the view
-          $chart = new LarapexChart;
-                  $chart->labels = (array_keys($groups));
-                  $chart->dataset = (array_values($groups));
-                  $chart->colours = $colours;
           return view('layout.app', compact('chart'));
     }
 
@@ -124,27 +96,9 @@ class ChartController extends Controller
         ->whereMonth('expenses_date', '8')
         ->where('expenses_totalamount')
         ->get();
-
-      $chart = (new LarapexChart)->setTitle('Perbelanjaan Ogos')
-                ->setSubtitle('Perbelanjaan')
-                ->setType('bar')
-                ->setXAxis(['Ogos'])
-                ->setGrid(false)
-                ->setDataset([
-                  [
-                    'name'  =>  'Active Users',
-                    'data'  =>  []
-                  ]
-                ])
-                  //Expenses::whereMonth('expenses_date', '=', '8'), Expenses::where('expenses_totalamount')]) 
-                ->setStroke(1);
       return view('layout.app', compact('chart'));
     }
 
-    public function testChart4(Request $request){
-      $expensesMonth = Expenses::whereMonth('expenses_date','8')->get();
-    	$exp_count = count($expensesMonth);    	
-    	return view('layout.app', compact('exp_count'));
-    }
+    
 }
 

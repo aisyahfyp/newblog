@@ -57,13 +57,11 @@ Route::group(['middleware' => 'preventBackHistory'], function()
 {
     //  Route::get('dashboard', 'DashboardController@dashboard');
     //  Route::get('/dashboard', 'ChartController@testChart')->name('dashboard');
-     Route::get('/dashboard', 'ChartController@testChart3')->name('dashboard');
+     Route::get('/dashboard', 'ChartController@testChart')->name('dashboard');
 });
 
 
-
-
-Route::get('/chart', 'ChartController@testChart');
+//Route::get('/chart', 'ChartController@testChart');
 
 
 // Route::get('chart', function () {

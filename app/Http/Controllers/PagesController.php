@@ -150,6 +150,13 @@ class PagesController extends Controller
         return redirect('/salmonth-add')->with('success', 'Jualan Direkodkan!');
     }
 
+    public function allExpenses(){
+        $results = DB::table('expenses')
+                ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
+                ->get();
+        
+        return view('layout.app', compact('results'));
+    }
 }
 
      

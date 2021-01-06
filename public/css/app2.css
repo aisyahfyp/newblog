@@ -166,6 +166,23 @@ body {
     
   }
 
+  .card-dash {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: #ffffff;
+    margin-bottom: 20px;
+    -webkit-column-break-inside: avoid;
+    padding: 24px;
+    box-sizing: border-box;
+    border-radius: 10px; 
+  }
+
+  .card-dash h3{
+    color: rgb(39, 31, 31);
+  }
+
   .card-exp{
     display: flex;
     flex-direction: column;
@@ -206,6 +223,18 @@ body {
   }
   
   .card:nth-child(3) {
+    height: 265px;
+  }
+
+  .card-dash:first-child {
+    height: 485px;
+  }
+  
+  .card-dash:nth-child(2) {
+    height: 485px;
+  }
+  
+  .card-dash:nth-child(3) {
     height: 265px;
   }
 

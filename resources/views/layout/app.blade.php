@@ -1,4 +1,4 @@
-{{-- NEW DASHBOARD --}}
+{{-- TEST NEW DASHBOARD --}}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -10,9 +10,11 @@
 {{-- <script type="text/javascript" src="{{ URL::asset('js/app2.js') }}"></script> --}}
 
 <link href="{{asset('assets/css/components.min.css')}}" rel="stylesheet" type="text/css">	
-<script type="text/javascript" src="{{asset('assets/js/jquery.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/bootstrap.bundle.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/js/echarts.min.js')}}"></script>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <link rel="stylesheet" type="text/css" href="css/app2.css">
 
@@ -53,29 +55,38 @@
       <div class="overviewcard">
         <div class="overviewcard__icon">Perbelanjaan</div>
           
-        <div class="overviewcard__info">Card</div>
+        <div class="overviewcard__info">
+          @foreach($results as $result)
+            {{$result}}
+          @endforeach
+        </div>
           
 
       </div>
       <div class="overviewcard">
-        <div class="overviewcard__icon">Jualan</div>
+        <div class="overviewcard__icon">Jualan
+        
+        </div>
         <div class="overviewcard__info">Card</div>
       </div>
       
     </div>
 
     <div class="main-cards">
-      <div class="card">
+      <div class="card-dash">
         <h3>Perbelanjaan</h3>
           {{-- {!! $chart->container() !!}
           <script src="{{ $chart->cdn() }}"></script>
           {{ $chart->script() }} --}}
-          <div class="chart has-fixed-height" id="bars_basic"></div>
-
+          {{-- <div class="chart has-fixed-height" id="bars_basic"></div> --}}
+          {{-- <div id="barchart1" style="width: 80%; height: 450px; display: block; margin: 0 auto;"></div> --}}
+          {{-- <div id="container"></div> --}}
+          <div id="barchart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
+      
       </div>
-      <div class="card">
+      <div class="card-dash">
         <h3>Jualan</h3>
-        
+        <div id="barchart2" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
         </div>
 
     </div>
@@ -84,7 +95,7 @@
   <footer class="footer">
     <div class="footer__copyright">&copy; 2018 MTH</div>
     {{-- <div class="footer__signature">Made with love by pure genius</div> --}}
-  </footer>
+</footer>
 </div>
 
 
@@ -112,51 +123,64 @@
         sidenavCloseEl.on('click', function() {
         toggleClassName(sidenavEl, 'active');
         });
-</script>        
-{{-- <script type="text/javascript">
-var bars_basic_element = document.getElementById('bars_basic');
-if (bars_basic_element) {
-    var bars_basic = echarts.init(bars_basic_element);
-    bars_basic.setOption({
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            
-                type: 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: ['Ogos'],
-                axisTick: {
-                    alignWithLabel: true
-                }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value'
-            }
-        ],
-        series: [
-            {
-                name: 'Expenses',
-                type: 'bar',
-                barWidth: '20%',
-                data: [
-                    {{$exp_count}},
-                ]
-            }
-        ]
-    });
-}
-</script> --}}
+
+      
+      google.charts.load('current', {'packages':['bar']});  
+        
+        google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Tarikh', 'Jumlah'],
+
+            @php
+              foreach($expenses as $expense) {
+                  echo "['".$expense->expenses_date."', ".$expense->expenses_totalamount."],";
+              }
+            @endphp
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Bar Graph | Sales',
+            subtitle: 'Perbelanjaan, dan Jumlah sejak: @php echo $expenses[0]->expenses_date @endphp',
+            
+            stroke: '#fff',
+            strokeWidth: 1,
+          },
+          bars: 'vertical',
+          backgroundColor: { fill:'transparent' }
+        };
+        var chart = new google.charts.Bar(document.getElementById('barchart'));
+        chart.draw(data, options);
+        //chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+      
+      google.charts.setOnLoadCallback(drawChart2);
+
+      function drawChart2() {
+        var data = google.visualization.arrayToDataTable([
+            ['Tarikh', 'Jumlah'],
+
+            @php
+              foreach($sales as $sale) {
+                  echo "['".$sale->sales_date."', ".$sale->sales_amount."],";
+              }
+            @endphp
+        ]);
+
+        var options = {
+          chart: {
+            title: 'Graf | Jualan',
+            subtitle: 'Tarikh, dan Jumlah sejak: @php echo $sales[0]->sales_date @endphp',
+          },
+          bars: 'vertical',
+        };
+        var chart = new google.charts.Bar(document.getElementById('barchart2'));
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+
+</script>
+
 
 </html>
