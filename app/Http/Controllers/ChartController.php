@@ -80,9 +80,21 @@ class ChartController extends Controller
       //   ->get()); 
       $sumSales["sum"] = Sales::get()->sum("sales_amount");
 
-      
+      //$inventory = Inventory::all();
 
-       return view('layout.app', compact('expenses', 'sales', 'sumExp', 'sumSales'));
+      $inventory = Inventory::query()
+       ->select([
+         'stock_category.category_name',
+         'stock_category.category_id',
+         'inventory.stock_quantity',
+          DB::raw('sum(stock_quantity) as stock_quantity')
+        ])
+        //->sum('stock_quantity')
+        ->leftJoin('stock_category', 'inventory.category_id', '=', 'stock_category.category_id')
+        ->groupBy('stock_category.category_name')
+        ->get();
+
+       return view('layout.app', compact('expenses', 'sales', 'sumExp', 'sumSales', 'inventory'));
     }
 
     public function testChart2(){
@@ -91,12 +103,22 @@ class ChartController extends Controller
           return view('layout.app', compact('chart'));
     }
 
-    public function testChart3(){
-      $expenses = Expenses::query()
-        ->whereMonth('expenses_date', '8')
-        ->where('expenses_totalamount')
-        ->get();
-      return view('layout.app', compact('chart'));
+    public function googleLineChart()
+    {
+        $sample = Expenses::select(
+                        DB::raw("year(expenses_date) as year"),
+                        DB::raw("SUM(expenses_totalamount) as total"))
+                    ->orderBy(DB::raw("YEAR(expenses_date)"))
+                    ->groupBy(DB::raw("YEAR(expenses_date)"))
+                    ->get();
+  
+        $result[] = ['Year','Expenses'];
+        foreach ($sample as $key => $value) {
+            $result[++$key] = [$value->year, (int)$value->total];
+        }
+  
+        return view('layout.app2')
+                ->with('sample',json_encode($result));
     }
 
     

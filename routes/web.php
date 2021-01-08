@@ -61,7 +61,7 @@ Route::group(['middleware' => 'preventBackHistory'], function()
 });
 
 
-//Route::get('/chart', 'ChartController@testChart');
+Route::get('/chart', 'ChartController@googleLineChart');
 
 
 // Route::get('chart', function () {

@@ -56,9 +56,9 @@
         <div class="overviewcard__icon">Perbelanjaan</div>
           
         <div class="overviewcard__info">
-          @foreach($sumExp as $result)
+          {{-- @foreach($sumExp as $result)
             {{$result}}
-          @endforeach
+          @endforeach --}}
         </div>
           
 
@@ -68,9 +68,9 @@
         
         </div>
         <div class="overviewcard__info"> 
-          @foreach($sumSales as $result)
+          {{-- @foreach($sumSales as $result)
             {{$result}}
-          @endforeach
+          @endforeach --}}
         </div>
       </div>
       
@@ -82,22 +82,21 @@
           {{-- <div class="chart has-fixed-height" id="bars_basic"></div> --}}
           {{-- <div id="barchart1" style="width: 80%; height: 450px; display: block; margin: 0 auto;"></div> --}}
           {{-- <div id="container"></div> --}}
-          <div id="barchart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>      
+          {{-- <div id="barchart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>       --}}
       </div>
       
       <div class="card-dash">
         <h3>Jualan</h3>
-        <div id="barchart2" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
+        {{-- <div id="barchart2" style="width: 80%; height: 450px; display: block; margin: auto;"></div> --}}
       </div>
       
       <div class="card-dash">
         <h3>Perbelanjaan & Jualan</h3>
-        <div id="barchart3" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
+        <div id="barchart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
       </div>
 
       <div class="card-dash">
         <h3>Inventori</h3>
-        <div id="piechart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
       </div>
     
     </div>
@@ -136,116 +135,21 @@
         });
 
       
-    google.charts.load('current', {'packages':['bar']});
-    google.charts.load('current', {'packages':['corechart']});  
-        
-        google.charts.setOnLoadCallback(drawChart);
 
+      var visitor = <?php echo $sample; ?>;
+      console.log(sample);
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-            ['Tarikh', 'Jumlah'],
-
-            @php
-              foreach($expenses as $expense) {
-                  echo "['".$expense->expenses_date."', ".$expense->expenses_totalamount."],";
-              }
-            @endphp
-        ]);
-
+        var data = google.visualization.arrayToDataTable(sample);
         var options = {
-          chart: {
-            title: 'Graf | Perbelanjaan',
-            subtitle: 'Perbelanjaan, dan Jumlah sejak: @php echo $expenses[0]->expenses_date @endphp',
-            
-            stroke: '#fff',
-            strokeWidth: 1,
-          },
-          bars: 'vertical',
-          backgroundColor: { fill:'transparent' }
+          title: 'Site Visitor Line Chart',
+          curveType: 'function',
+          legend: { position: 'bottom' }
         };
-        var chart = new google.charts.Bar(document.getElementById('barchart'));
+        var chart = new google.visualization.LineChart(document.getElementById('barchart'));
         chart.draw(data, options);
-        //chart.draw(data, google.charts.Bar.convertOptions(options));
       }
-      
-    google.charts.setOnLoadCallback(drawChart2);
-
-      function drawChart2() {
-        var data = google.visualization.arrayToDataTable([
-            ['Tarikh', 'Jumlah'],
-
-            @php
-              foreach($sales as $sale) {
-                  echo "['".$sale->sales_date."', ".$sale->sales_amount."],";
-              }
-            @endphp
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Graf | Jualan',
-            subtitle: 'Tarikh, dan Jumlah sejak: @php echo $sales[0]->sales_date @endphp',
-          },
-          bars: 'vertical',
-        };
-        var chart = new google.charts.Bar(document.getElementById('barchart2'));
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-
-    //google.charts.setOnLoadCallback(drawChart3);
-
-      function drawChart3() {
-        var data = google.visualization.arrayToDataTable([
-          ['Jumlah', 'Perbelanjaan', 'Jualan'],
-
-            @php
-              foreach($sumExp as $exp) {
-                  echo "['".$exp."'],";
-              }
-            @endphp
-
-            @php
-              foreach($sumSales as $sale) {
-                  echo "['".$sale."'],";
-              }
-            @endphp
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('barchart3'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-
-    google.charts.setOnLoadCallback(drawChart4);
-
-        function drawChart4() {
-
-          var data = google.visualization.arrayToDataTable([
-            ['Kategori', 'Kuantiti'],
-
-                @php
-                foreach($inventory as $stock) {
-                    echo "['".$stock->category_name."', ".$stock->stock_quantity."],";
-                }
-                @endphp
-          ]);
-
-          var options = {
-            title: 'Kategori Barang & Kuantiti',
-            is3D: false,
-          };
-
-          var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-          chart.draw(data, options);
-        }
 
 </script>
 
