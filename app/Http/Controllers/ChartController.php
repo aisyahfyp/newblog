@@ -74,16 +74,16 @@ class ChartController extends Controller
         ->whereMonth('sales_date', '8')
         ->get();
 
-      $results = array (DB::table('expenses')
-        ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
-        ->get('total_expenses')); 
+      $sumExp["sum"] = Expenses::get()->sum("expenses_totalamount");
+      // $results["sum"] = array (DB::table('expenses')
+      //   ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
+      //   ->get()); 
+      $sumSales["sum"] = Sales::get()->sum("sales_amount");
+
       
-       return view('layout.app', compact('expenses', 'sales', 'results'));
+
+       return view('layout.app', compact('expenses', 'sales', 'sumExp', 'sumSales'));
     }
-
-
-
-    
 
     public function testChart2(){
       $groups = Expenses::pluck('expenses_totalamount', 'expenses_date');
