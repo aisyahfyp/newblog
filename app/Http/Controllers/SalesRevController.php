@@ -58,56 +58,64 @@ public function showJanExpenses(){
         if (!$expenses) {
           return redirect('/expsalmonth');
         }
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '1')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showFebExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '2')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '2')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showMarExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '3')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '3')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showAprExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '4')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '4')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showMayExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '5')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '5')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showJuneExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '6')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '6')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showJulyExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '7')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '7')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showAugExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '8')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '8')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       
       if(!$expenses){
         echo "--Tiada perbelanjaan untuk dipaparkan--";
@@ -128,28 +136,32 @@ public function showSeptExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '9')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '9')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showOctExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '10')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '10')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showNovExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '11')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '11')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showDecExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '12')
         ->get();
-      return view('layout.expMonth', compact('expenses'));
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '12')->get()->sum("expenses_totalamount");
+      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 
@@ -160,84 +172,96 @@ public function showJanSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '1')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '1')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showFebSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '2')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '2')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showMarSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '3')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '3')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showAprSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '4')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '4')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showMaySales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '5')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '5')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showJuneSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '6')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '6')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showJulySales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '7')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '7')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showAugSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '8')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '8')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showSeptSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '9')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '9')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showOctSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '10')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '10')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showNovSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '11')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '11')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 public function showDecSales(){
       $sales = Sales::query()
         ->whereMonth('sales_date', '12')
         ->get();
-      return view('layout.salMonth', compact('sales'));
+      $sumSales["sum"] = Sales::whereMonth('sales_date', '12')->get()->sum("sales_amount");
+      return view('layout.salMonth', compact('sales', 'sumSales'));
       }
 
 

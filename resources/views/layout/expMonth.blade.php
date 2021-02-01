@@ -42,7 +42,11 @@
       <div class="overviewcard">
         <div class="overviewcard__icon">Perbelanjaan</div>
         
-        <div class="overviewcard__info">Card</div>
+        <div class="overviewcard__info">
+          @foreach($sumExp as $result)
+            {{$result}}
+          @endforeach
+        </div>
       </div>
     </div>
 

@@ -41,7 +41,11 @@
       <div class="overviewcard">
         <div class="overviewcard__icon">Jualan</div>
         
-        <div class="overviewcard__info">Card</div>
+        <div class="overviewcard__info">
+          @foreach($sumSales as $result)
+            {{$result}}
+          @endforeach
+        </div>
       </div>
     </div>
 
@@ -68,7 +72,7 @@
                         <td>{{$item->sales_amount}}</td>
                         {{-- <td>{{$item->expenses_addstock}}</td> --}}
                         {{-- <td>{{$item->sales_totalamount}}</td> --}}
-                        <div style="display: none">{{$sum += $item->sales_totalamount}}</div>
+                        <div style="display: none">{{$sum += $item->sales_amount}}</div>
                         {{-- <td>{{$item->quantity}}</td>
                         <td>{{$item->price}}</td> --}}
                     </tr>                            
