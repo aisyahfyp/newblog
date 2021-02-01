@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -69,5 +70,28 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function showRegister()
+    {
+        // show the form
+        return view('register2');
+    }
+
+    public function addRegister(Request $request){
+        $this->validate($request, array(
+            'username'  =>  'required',
+            'email'     => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password'  =>  'required',
+            
+            //'sales_totalamount' => 'required',
+        ));
+
+        $user = new User();
+        $user->username = $request->input('username');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        $user->save();
+        return redirect('/')->with('success', 'Pendaftaran Berjaya!');
     }
 }

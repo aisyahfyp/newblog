@@ -1,4 +1,4 @@
-{{-- LOGIN PAGE --}}
+{{-- LOGIN PAGE GUNA --}}
 {{-- <!doctype html>
 <html>
 <head>
@@ -97,7 +97,10 @@
         <input type="password" name="password" class="form-control" />
         </div>
         <div class="form-group">
-        <input type="submit" name="login" class="btn btn-primary" value="Login" />
+        <input type="submit" name="login" class="btn btn-primary" value="Hantar" />
+        </div>
+        <div class="container signin">
+            <p>Belum memiliki akaun? Daftar <a href="/register">di sini</a>.</p>
         </div>
    </form>
   </div>

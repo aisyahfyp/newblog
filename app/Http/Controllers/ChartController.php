@@ -8,7 +8,7 @@ use App\Inventory;
 use App\StockCategory;
 use App\Expenses;
 use App\Sales;
-
+use Carbon\Carbon;
 
 //use DB;
 
@@ -66,13 +66,13 @@ class ChartController extends Controller
 
     public function testChart(){
 
-      $expenses = Expenses::query()
-        ->whereMonth('expenses_date', '8')
-        ->get();
+      // $expenses = Expenses::query()
+      //   ->whereMonth('expenses_date', '8')
+      //   ->get();
 
-      $sales = Sales::query()
-        ->whereMonth('sales_date', '8')
-        ->get();
+      // $sales = Sales::query()
+      //   ->whereMonth('sales_date', '8')
+      //   ->get();
 
       $sumExp["sum"] = Expenses::get()->sum("expenses_totalamount");
       // $results["sum"] = array (DB::table('expenses')
@@ -94,7 +94,59 @@ class ChartController extends Controller
         ->groupBy('stock_category.category_name')
         ->get();
 
-       return view('layout.app', compact('expenses', 'sales', 'sumExp', 'sumSales', 'inventory'));
+        //$data = Sales::whereMonth('sales_date', '8')->get()->sum("sales_amount");
+        
+        //dd($data);
+        // $data = Expenses::query()
+        // ->select([
+        //    DB::raw('sum(expenses_totalamount) as expenses_total')
+        //  ])
+        //->whereMonth('expenses_date', '8')
+        //  ->whereIn(DB::raw('MONTH(expenses_date)'), [1,2,3,4,5,6,7,8,9,10,11,12])
+        //  ->get();  
+
+        // $data = Expenses::whereYear('expenses_date', '=', 2020)
+        // ->orWhere(function ($query) {
+        //   $query->whereMonth('expenses_date', '=', 1)
+        //       ->whereMonth('expenses_date', '=', 2)
+        //       ->whereMonth('expenses_date', '=', 3)
+        //       ->whereMonth('expenses_date', '=', 4)
+        //       ->whereMonth('expenses_date', '=', 5)
+        //       ->whereMonth('expenses_date', '=', 6)
+        //       ->whereMonth('expenses_date', '=', 7)
+        //       ->whereMonth('expenses_date', '=', 8)
+        //       ->whereMonth('expenses_date', '=', 9)
+        //       ->whereMonth('expenses_date', '=', 10)
+        //       ->whereMonth('expenses_date', '=', 11)
+        //       ->whereMonth('expenses_date', '=', 12);
+        //     })
+        //     ->select([DB::raw('sum(expenses_totalamount) as expenses_total')])
+        //     ->get();
+    
+    $data = DB::table("expenses")
+            ->whereDate('expenses_date', '>', Carbon::now()->subDays(30))
+            ->get();
+    
+    $data2 = Sales::all();
+      // $data2 = Sales::query()
+      //         ->select(DB::raw('MONTH(sales_date) as month_name'))
+      //         ->whereMonth('sales_date', date('m'))
+      //         ->groupBy('month_name')
+      //         ->get()
+      //         ->sum('sales_amount');
+
+      $getMonth = [];
+        foreach (range(1, 12) as $m) {
+            $getMonth[] = date('m - F', mktime(0, 0, 0, $m, 1));
+            $expenses = Expenses::query()
+              ->whereMonth('expenses_date', $m )
+              ->get();
+        }
+
+
+      //dd($getMonth);
+
+       return view('layout.app', compact('sumExp', 'sumSales', 'inventory', 'data2', 'data'));
     }
 
     public function testChart2(){
@@ -106,15 +158,15 @@ class ChartController extends Controller
     public function googleLineChart()
     {
         $sample = Expenses::select(
-                        DB::raw("year(expenses_date) as year"),
+                        DB::raw("MONTH(expenses_date) as year"),
                         DB::raw("SUM(expenses_totalamount) as total"))
-                    ->orderBy(DB::raw("YEAR(expenses_date)"))
-                    ->groupBy(DB::raw("YEAR(expenses_date)"))
+                    ->orderBy(DB::raw("MONTH(expenses_date)"))
+                    ->groupBy(DB::raw("MONTH(expenses_date)"))
                     ->get();
   
-        $result[] = ['Year','Expenses'];
+        $result[] = ['Month','Expenses'];
         foreach ($sample as $key => $value) {
-            $result[++$key] = [$value->year, (int)$value->total];
+            $result[++$key] = [$value->month, (int)$value->total];
         }
   
         return view('layout.app2')

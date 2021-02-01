@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-//use ArielMejiaDev\LarapexCharts\Facades\LarapexChart;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,6 +47,10 @@ Route::get('/', array('uses' => 'Auth\LoginController@showLogin'))->name('home')
 Route::post('/login', array('uses' => 'Auth\LoginController@checklogin'));
 Route::get('/login/successlogin', array('uses' => 'Auth\LoginController@successlogin'));
 Route::get('/logout', array('uses' => 'Auth\LoginController@logout'));
+Route::get('/register', array('uses' => 'Auth\RegisterController@showRegister'));
+Route::post('/register/save', array ('uses' => 'Auth\RegisterController@addRegister'))->name('register.add');
+
+
 
 // route to process the form
 // Route::post('/login', array('uses' => 'Auth\LoginController@doLogin'));
