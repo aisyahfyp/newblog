@@ -136,6 +136,7 @@ Route::get('/expdf10', 'SalesRevController@expOctPdf');
 Route::get('/expdf11', 'SalesRevController@expNovPdf');
 Route::get('/expdf12', 'SalesRevController@expDecPdf');
 
+Route::get('/expdfyear', 'SalesRevController@expByYear');
 /////////////////PDF SALES////////////////////////
 
 Route::get('/salpdf1', 'SalesRevController@salJanPdf');

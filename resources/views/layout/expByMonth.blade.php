@@ -128,6 +128,13 @@
             <a href="/expmonth-add">Tambah</a>
         </div>
       </div>
+
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Perbelanjaan 2020</div>
+        <div class="overviewcard__info">
+            <a href="/expdfyear">Cetak</a>
+        </div>
+      </div>
     </div>
 
   </main>

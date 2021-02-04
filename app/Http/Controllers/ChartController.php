@@ -74,11 +74,11 @@ class ChartController extends Controller
       //   ->whereMonth('sales_date', '8')
       //   ->get();
 
-      $sumExp["sum"] = Expenses::get()->sum("expenses_totalamount");
+      $sumExp["sum"] = Expenses::whereYear('expenses_date', '2021')->get()->sum("expenses_totalamount");
       // $results["sum"] = array (DB::table('expenses')
       //   ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
       //   ->get()); 
-      $sumSales["sum"] = Sales::get()->sum("sales_amount");
+      $sumSales["sum"] = Sales::whereYear('sales_date', '2020')->get()->sum("sales_amount");
 
       //$inventory = Inventory::all();
 

@@ -45,19 +45,18 @@ public function showSalByMonth(){
 ///////////EXPENSES BY MONTH///////////////////////////////////////////////////////////
 
 public function showJanExpenses(){
-      // $expenses = Expenses::query()->first()
-      //   ->whereMonth('expenses_date', '1')
-      //   ->get();
+      $expenses = Expenses::query()
+        ->whereMonth('expenses_date', '1')
+        ->get();
       // return view('expensesMonth', compact('expenses'));
 
       // if($expenses){
       //   echo "--Tiada perbelanjaan untuk dipaparkan--";
       // }
 
-      $expenses = Expenses::whereMonth('expenses_date', '1'); // model or null
-        if (!$expenses) {
-          return redirect('/expsalmonth');
-        }
+        // if (!$expenses) {
+        //   return redirect('/expsalmonth');
+        // }
       $sumExp["sum"] = Expenses::whereMonth('expenses_date', '1')->get()->sum("expenses_totalamount");
       return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
@@ -590,6 +589,14 @@ public function testAugExpenses(){
   return view('layout.expMonth', compact('expenses'));
   }
 
+public function expByYear(){
+  $expenses = DB::select('select year(expenses_date) as year, month(expenses_date) as month, sum(expenses_totalamount) as total_amount from expenses where year(expenses_date)=2020 group by year(expenses_date), month(expenses_date)');
+  //return view('total_amount',['expenses'=>$expenses]);
+  view()->share('expenses',$expenses);
+  $pdf = PDF::loadView('pdf-exp.pdf_viewMonthExp', $expenses);
 
+  return $pdf->stream('expensesMonth.pdf');
+
+  }
 
 }
