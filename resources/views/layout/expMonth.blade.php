@@ -62,7 +62,7 @@
                     {{-- <td>Bulan</td> --}}
                     <th>Tarikh</th>
                     <th>Jumlah</th>
-                    <th>Kuantiti</th>
+                    
                     <th>Jumlah Keseluruhan</th>
                     {{-- <td>Harga</td>
                     <td>Kuantiti</td>
@@ -80,14 +80,12 @@
                     //$dateObj = DateTime::createFromFormat('!m', $monthNum);
                     //$monthName = $dateObj->format('F');
                 ?>
-                    {{-- <td>{{ $monthName }}</td> --}}
+                    
                     <td>{{$item->expenses_date}}</td>
                     {{-- <td>{{ Carbon\Carbon::parse($item->expenses_date)->format('d-m-Y') }}</td> --}}
                     <td>{{$item->expenses_amount}}</td>
-                    <td>{{$item->expenses_quantity}}</td>
-                    {{-- <td>{{$item->expenses_addstock}}</td> --}}
-                    <td>{{$item->expenses_totalamount}}</td>
-                    <div style="display: none">{{$sum += $item->expenses_totalamount}}</div>
+                    {{-- <td>{{$item->expenses_totalamount}}</td> --}}
+                    <div style="display: none">{{$sum += $item->expenses_amount}}</div>
                     {{-- <td>{{$item->quantity}}</td>
                     <td>{{$item->price}}</td> --}}
                 </tr>                            

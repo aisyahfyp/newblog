@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Inventory;
 use App\ExpCategory;
 use App\Expenses;
+use App\Sales;
 use Session;
 //use Auth;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -109,7 +110,6 @@ class PagesController extends Controller
             'expenses_date'     =>  'required',
             'expcategory_id'    =>  'required',
             'expenses_amount'   =>  'required',
-            'expenses_quantity' =>  'required',
             //'expenses_totalamount' => 'required',
         ));
 
@@ -129,8 +129,7 @@ class PagesController extends Controller
         $exp->expenses_date = $request->input('expenses_date');
         $exp->expcategory_id = $request->input('expcategory_id');
         $exp->expenses_amount = $request->input('expenses_amount');
-        $exp->expenses_quantity = $request->input('expenses_quantity');
-        $exp->setExpTotal();
+        // $exp->setExpTotal();
         $exp->save();
         return redirect('/expmonth-add')->with('success', 'Perbelanjaan Direkodkan!');
     }
@@ -145,14 +144,13 @@ class PagesController extends Controller
         $sales = new Sales();
         $sales->sales_date = $request->input('sales_date');
         $sales->sales_amount = $request->input('sales_amount');
-        $exp->setSalTotal();
-        $exp->save();
+        $sales->save();
         return redirect('/salmonth-add')->with('success', 'Jualan Direkodkan!');
     }
 
     public function allExpenses(){
         $results = DB::table('expenses')
-                ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
+                ->select(DB::raw('SUM(expenses_amount) as total_expenses'))
                 ->get();
         
         return view('layout.app', compact('results'));

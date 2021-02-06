@@ -74,11 +74,11 @@ class ChartController extends Controller
       //   ->whereMonth('sales_date', '8')
       //   ->get();
 
-      $sumExp["sum"] = Expenses::whereYear('expenses_date', '2021')->get()->sum("expenses_totalamount");
+      $sumExp["sum"] = Expenses::whereYear('expenses_date', '2021')->get()->sum("expenses_amount");
       // $results["sum"] = array (DB::table('expenses')
       //   ->select(DB::raw('SUM(expenses_totalamount) as total_expenses'))
       //   ->get()); 
-      $sumSales["sum"] = Sales::whereYear('sales_date', '2020')->get()->sum("sales_amount");
+      $sumSales["sum"] = Sales::whereYear('sales_date', '2021')->get()->sum("sales_amount");
 
       //$inventory = Inventory::all();
 
@@ -127,7 +127,9 @@ class ChartController extends Controller
             ->whereDate('expenses_date', '>', Carbon::now()->subDays(30))
             ->get();
     
-    $data2 = Sales::all();
+    $data2 = DB::table("sales")
+            ->whereDate('sales_date', '>', Carbon::now()->subDays(30))
+            ->get();
       // $data2 = Sales::query()
       //         ->select(DB::raw('MONTH(sales_date) as month_name'))
       //         ->whereMonth('sales_date', date('m'))

@@ -590,13 +590,19 @@ public function testAugExpenses(){
   }
 
 public function expByYear(){
-  $expenses = DB::select('select year(expenses_date) as year, month(expenses_date) as month, sum(expenses_totalamount) as total_amount from expenses where year(expenses_date)=2020 group by year(expenses_date), month(expenses_date)');
+  $expenses = DB::select('select year(expenses_date) as year, month(expenses_date) as month, sum(expenses_amount) as total_amount from expenses where year(expenses_date)=2020 group by year(expenses_date), month(expenses_date)');
   //return view('total_amount',['expenses'=>$expenses]);
   view()->share('expenses',$expenses);
   $pdf = PDF::loadView('pdf-exp.pdf_viewMonthExp', $expenses);
-
   return $pdf->stream('expensesMonth.pdf');
-
   }
+
+  public function salesByYear(){
+    $sales = DB::select('select year(sales_date) as year, month(sales_date) as month, sum(sales_amount) as total_amount from sales where year(sales_date)=2020 group by year(sales_date), month(sales_date)');
+    //return view('total_amount',['expenses'=>$expenses]);
+    view()->share('sales',$sales);
+    $pdf = PDF::loadView('pdf-sales.pdf_viewMonthSales', $sales);
+    return $pdf->stream('salesMonth.pdf');
+    }
 
 }

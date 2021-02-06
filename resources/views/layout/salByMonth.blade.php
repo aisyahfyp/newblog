@@ -128,7 +128,12 @@
             <a href="/salmonth-add">Tambah</a>
         </div>
       </div>
-
+      <div class="overviewcard">
+        <div class="overviewcard__icon">Jualan 2020</div>
+        <div class="overviewcard__info">
+            <a href="/salpdfyear">Cetak</a>
+        </div>
+      </div>
 
     </div>
 

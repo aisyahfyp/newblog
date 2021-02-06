@@ -152,8 +152,7 @@ Route::get('/salpdf10', 'SalesRevController@salOctPdf');
 Route::get('/salpdf11', 'SalesRevController@salNovPdf');
 Route::get('/salpdf12', 'SalesRevController@salDecPdf');
 
-
-
+Route::get('/salpdfyear', 'SalesRevController@salesByYear');
 
 ////////TESTING///////////
 Route::get('/test1', 'InventoryController@showMonthInventory');

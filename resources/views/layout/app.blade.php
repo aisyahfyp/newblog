@@ -146,7 +146,7 @@
             ['Month', 'Total'],
                 @php
                 foreach($data as $d) {
-                    echo "['".$d->expenses_date."', ".$d->expenses_totalamount."],";
+                    echo "['".$d->expenses_date."', ".$d->expenses_amount."],";
                 }
                 @endphp
         ]);

@@ -91,10 +91,10 @@
             </li>
             <li>
                 <label for="add-sales">Jualan</label>
-                <input type="int" name="sales_amount" id="add-sales" placeholder="Jumlah Jualan">
+                <input type="number" name="sales_amount" id="add-sales" placeholder="Jumlah Jualan">
             </li>
             <li>
-                <button type="submit" name="submit">Tambah</button>
+                <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
             </li>
           </ul>
         </form>

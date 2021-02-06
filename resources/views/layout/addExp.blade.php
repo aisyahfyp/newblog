@@ -100,28 +100,19 @@
                 <label for="exp-amount">Perbelanjaan</label>
                 <input type="number" name="expenses_amount" id="add-exp-amount" placeholder="Jumlah Perbelanjaan">
             </li>
-            <li>    
-                <label for="exp-quantity">Kuantiti</label>
-                <input type="number" name="expenses_quantity" id="add-exp-quantity" placeholder="Kuantiti">
-            </li>
-            <li>    
-                {{-- <label for="exp-total">Jumlah</label> --}}
-                <input type="text" name="expenses_totalamount" id="add-exp-total" style="display:none;">
-            </li>
-            
             <li>
                 <button type="submit" name="submit" class="btn btn-primary">Tambah</button>
             </li>
         </ul>
         </form>
-            <script type="text/javascript">
+            {{-- <script type="text/javascript">
             $('#expenses_amount, #expenses_quantity').change(function(){
             var rate = parseFloat($('#expenses_amount').val());
             var box = parseFloat($('#expenses_quantity').val());
 
             $('#expenses_totalamount').val(rate * box);    
           });
-            </script>
+            </script> --}}
       </div>
       
     </div>

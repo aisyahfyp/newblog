@@ -13,8 +13,6 @@ class Expenses extends Model {
         'expenses_date', 
         'expcategory_id', 
         'expenses_amount', 
-        'expenses_quantity',
-        'expenses_totalamount',
     ];
 
     public function category(){

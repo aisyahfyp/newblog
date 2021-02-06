@@ -9,8 +9,7 @@ class Sales extends Model {
     public $timestamps = false;
     protected $fillable = [
         'sales_date',  
-        'sales_amount', 
-        'sales_totalamount',
+        'sales_amount',
     ];
 
     public function setSalTotal() {
