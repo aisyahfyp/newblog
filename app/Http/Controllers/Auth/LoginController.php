@@ -126,7 +126,7 @@ class LoginController extends Controller
                 
                 if ($hashedPassword && Hash::check($password, $hashedPassword->password)) {
                 echo "Welcome User";
-                return redirect('/dashboard');
+                return redirect('/dashboard')->with('username', $username);
                 }
                 else{
                 echo "Please enter correct details to login";

@@ -63,7 +63,7 @@
                     <th>Tarikh</th>
                     <th>Jumlah</th>
                     
-                    <th>Jumlah Keseluruhan</th>
+                    {{-- <th>Jumlah Keseluruhan</th> --}}
                     {{-- <td>Harga</td>
                     <td>Kuantiti</td>
                     <td>Jumlah</td> --}}
@@ -90,15 +90,11 @@
                     <td>{{$item->price}}</td> --}}
                 </tr>                            
             @endforeach
-                <p></p>
+                
                 {{-- <p>Jumlah Perbelanjaan : RM {{$sum}}</p> --}}
                 <tr>
                     <th>Jumlah Perbelanjaan</th>
-                    <th>
-                        <th>
-                            <th>{{$sum}}</th>
-                        </th>
-                    </th>
+                    <th>{{$sum}}</th>
                 </tr>
             </table>
 

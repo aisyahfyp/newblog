@@ -57,23 +57,23 @@ public function showJanExpenses(){
         // if (!$expenses) {
         //   return redirect('/expsalmonth');
         // }
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '1')->get()->sum("expenses_totalamount");
+      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '1')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");
       return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
+      
 
 public function showFebExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '2')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '2')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '2')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showMarExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '3')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '3')->get()->sum("expenses_totalamount");
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '3')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");
       return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
@@ -81,40 +81,35 @@ public function showAprExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '4')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '4')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '4')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showMayExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '5')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '5')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '5')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showJuneExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '6')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '6')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '6')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showJulyExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '7')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '7')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '7')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showAugExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '8')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '8')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '8')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       
       if(!$expenses){
         echo "--Tiada perbelanjaan untuk dipaparkan--";
@@ -122,20 +117,11 @@ public function showAugExpenses(){
       
     }
 
-    //   if (Expense::whereMonth('expenses_date', '=', '8')->exists()) {
-    //     return view('expensesMonth', compact('expenses'));
-    //  }
-    
-
-  //    if (Expenses::where('email', Input::get('email'))->exists()) {
-  //     return view('expensesMonth', compact('expenses'));
-  // }
-
 public function showSeptExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '9')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '9')->get()->sum("expenses_totalamount");
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '9')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");
       return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
@@ -143,24 +129,21 @@ public function showOctExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '10')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '10')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '10')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showNovExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '11')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '11')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '11')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 public function showDecExpenses(){
       $expenses = Expenses::query()
         ->whereMonth('expenses_date', '12')
         ->get();
-      $sumExp["sum"] = Expenses::whereMonth('expenses_date', '12')->get()->sum("expenses_totalamount");
-      return view('layout.expMonth', compact('expenses', 'sumExp'));
+        $sumExp["sum"] = Expenses::whereMonth('expenses_date', '12')->whereYear('expenses_date', '2021')->get()->sum("expenses_amount");      return view('layout.expMonth', compact('expenses', 'sumExp'));
       }
 
 
@@ -413,9 +396,10 @@ public function showDecSales(){
         ->whereMonth('expenses_date', '1')
         ->get(); // model or null
 
-        if (!$expenses) {
-          return redirect('/testing');
-        }
+        // if (!$expenses) {
+        //   return redirect('/testing');
+        // }
+      //$month = 'Januari';
         view()->share('expenses',$expenses);
         $pdf = PDF::loadView('pdf-exp.pdf_viewExp', $expenses);
       

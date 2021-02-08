@@ -160,6 +160,7 @@ Route::get('/test1', 'InventoryController@showMonthInventory');
 
 Route::get('/expmonth-add', 'PagesController@addCategory');
 Route::post('/expmonth/save', 'PagesController@addExp')->name('exp.add');
+Route::post('/expmonth/del/{id}', 'PagesController@deleteExp')->name('exp.del');
 
 Route::get('/salmonth-add', 'PagesController@showAddSales');
 Route::post('/salmonth/save', 'PagesController@addSales')->name('sal.add');

@@ -78,8 +78,8 @@
           @endif
 
             @if(\Session::has('success'))
-            <div class="alert alert-success">
-            <p>{{\Session::get('success')}}</p>
+              <div class="alert alert-success">
+            <strong>{{\Session::get('success')}}</strong>
             </div>
             @endif
 
@@ -115,6 +115,49 @@
             </script> --}}
       </div>
       
+    </div>
+
+    <div class="main-cards">
+      <div class="card-exp-sales">
+        <h3>Padam Perbelanjaan</h3>
+        <table id="expenses">
+                <tr>
+                    <th>Tarikh</th>
+                    <th>Jumlah</th>
+                    <th>Padam</th>
+                </tr>
+          @foreach ($expall as $item)
+                <tr>
+                    <td>{{$item->expenses_date}}</td>
+                    <td>{{$item->expenses_amount}}</td>
+                    <td>
+                      <form action="{{ route('exp.del', $item->expenses_date)}}" method="POST">
+                        @csrf
+                      {{-- <ul class="flex-outer">
+                        @if(count($errors) > 0)
+                          <div class="alert alert-danger">
+                            <ul>
+                              @foreach($errors->all() as $error)
+                                <li>{{$error}}</li>
+                              @endforeach
+                            </ul>
+                          </div>
+                        @endif
+
+                        @if(\Session::has('success'))
+                          <div class="alert alert-success">
+                          <p>{{\Session::get('success')}}</p>
+                          </div>
+                        @endif
+                        </ul> --}}
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                        
+                      </form>
+                    </td>
+                </tr>                            
+          @endforeach
+          
+      </table>
     </div>
   </main>
 

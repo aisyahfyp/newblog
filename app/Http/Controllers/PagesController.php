@@ -9,6 +9,7 @@ use App\ExpCategory;
 use App\Expenses;
 use App\Sales;
 use Session;
+use Carbon\Carbon;
 //use Auth;
 //use Illuminate\Foundation\Auth\AuthenticatesUsers;
 //use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,7 @@ class PagesController extends Controller
     }
 
     public function newDashboard(){
+        
         return view ('layout.app');
     }
 
@@ -97,8 +99,11 @@ class PagesController extends Controller
     }
 
     public function addCategory(){
-        $category=ExpCategory::all();
-        return view('layout.addExp', compact('category'));
+        $category = ExpCategory::all();
+        $expall = DB::table("expenses")
+                ->whereDate('expenses_date', '>', Carbon::now()->subDays(30))
+                ->get();
+        return view('layout.addExp', compact('category', 'expall'));
     }
 
     public function showAddSales(){
@@ -132,6 +137,15 @@ class PagesController extends Controller
         // $exp->setExpTotal();
         $exp->save();
         return redirect('/expmonth-add')->with('success', 'Perbelanjaan Direkodkan!');
+    }
+
+    public function deleteExp($expenses_date)
+    {
+        $expenses = Expenses::where('expenses_date', '=', $expenses_date);
+       // $expenses = DB::table('expenses')->find($expenses_date);
+        //$expenses = DB::table('expenses')->where('expenses_date', $expenses_date)->find($expenses_date);
+        $expenses->delete();
+        return redirect('/expmonth-add')->with('success', 'Perbelanjaan Dipadam!');
     }
 
     public function addSales(Request $request){

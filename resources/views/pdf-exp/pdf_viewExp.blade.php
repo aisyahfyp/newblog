@@ -13,16 +13,17 @@
   <body>
       <h1 style="font-size:30px; text-align:center">RSS Delek Frozen Food</h1>
       <hr>
-      <p style="font-size:15px; text-align:center">Perbelanjaan</p>
-
+      
+        <p style="font-size:15px; text-align:center">Perbelanjaan</p>
+      
 
 <table class="table table-bordered">
   <thead class="thead-dark">
     <tr>
       <th scope="col" style="text-align:center">Tarikh</th>
       <th scope="col" style="text-align:center">Jumlah</th>
-      <th scope="col" style="text-align:center">Kuantiti</th>
-      <th scope="col" style="text-align:center">Jumlah Keseluruhan</th>
+      {{-- <th scope="col" style="text-align:center">Kuantiti</th>
+      <th scope="col" style="text-align:center">Jumlah Keseluruhan</th> --}}
     </tr>
   </thead>
   <tbody>
@@ -35,13 +36,13 @@
     <tr>
       <td style="text-align:center">{{$item->expenses_date}}</td>
 	    <td style="text-align:center">{{$item->expenses_amount}}</td>
-      <td style="text-align:center">{{$item->expenses_quantity}}</td>
-      <td style="text-align:center">{{$item->expenses_totalamount}}</td>
-      <div style="display: none">{{$sum += $item->expenses_totalamount}}</div>
+      {{-- <td style="text-align:center">{{$item->expenses_quantity}}</td>
+      <td style="text-align:center">{{$item->expenses_totalamount}}</td> --}}
+      <div style="display: none">{{$sum += $item->expenses_amount}}</div>
     </tr>
       @endforeach
     <tr>
-      <th colspan="3" style="text-align:center">Jumlah Perbelanjaan</th>
+      <th colspan="1" style="text-align:center">Jumlah Perbelanjaan</th>
       <td style="text-align:center">{{$sum}}</td>
     </tr>
 	

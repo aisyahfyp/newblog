@@ -34,8 +34,13 @@
     <div class="sidenav__close-icon">
       <i class="fas fa-times sidenav__brand-close"></i>
     </div>
-
+     {{-- {{ Auth::user()->username }} --}}
     <ul class="sidenav__list">
+        {{-- @foreach($username as $users)
+        <p>Hai, {{ $users->username }}</p>
+        @endforeach --}}
+      {{-- <p>Hai, {{ Auth::user() }}</p> --}}
+      {{-- <li class="sidenav__list-item">Hai, {{$user}}</li> --}}
       <li class="sidenav__list-item"><a href="/dashboard">Utama</a></li>
       <li class="sidenav__list-item"><a href="/expmonth">Perbelanjaan</a></li>
       <li class="sidenav__list-item"><a href="/salmonth">Jualan</a></li>

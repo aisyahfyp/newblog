@@ -8,7 +8,9 @@ use App\Inventory;
 use App\StockCategory;
 use App\Expenses;
 use App\Sales;
+use App\User;
 use Carbon\Carbon;
+use Auth;
 
 //use DB;
 
@@ -144,11 +146,10 @@ class ChartController extends Controller
               ->whereMonth('expenses_date', $m )
               ->get();
         }
-
-
-      //dd($getMonth);
-
-       return view('layout.app', compact('sumExp', 'sumSales', 'inventory', 'data2', 'data'));
+      //$username = Auth::user();
+      // dd($user);
+      // $user = User::all();
+      return view('layout.app', compact('sumExp', 'sumSales', 'inventory', 'data2', 'data'));
     }
 
     public function testChart2(){
