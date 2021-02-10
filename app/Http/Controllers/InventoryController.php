@@ -36,8 +36,15 @@ class InventoryController extends Controller
 
     public function createPDFInv() {
       // retreive all records from db
-      $inventory = Inventory::all();
+      //$inventory = Inventory::all();
+      $inventory = DB::table('stock_category')
+      ->select('stock_category.category_id','stock_category.category_name')
+      ->join('inventory','inventory.category_id','=','stock_category.category_id')
+      ->get();
 
+      dd($inventory);
+      //$inventory = Inventory::all()->groupBy('category_id');   
+       
       // share data to view
       view()->share('inventory',$inventory);
       $pdf = PDF::loadView('pdf_view', $inventory);

@@ -114,10 +114,7 @@
           });
             </script> --}}
       </div>
-      
-    </div>
-
-    <div class="main-cards">
+    
       <div class="card-exp-sales">
         <h3>Padam Perbelanjaan</h3>
         <table id="expenses">
@@ -150,7 +147,7 @@
                           </div>
                         @endif
                         </ul> --}}
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit">Padam</button>
                         
                       </form>
                     </td>
@@ -158,6 +155,7 @@
           @endforeach
           
       </table>
+    </div>
     </div>
   </main>
 

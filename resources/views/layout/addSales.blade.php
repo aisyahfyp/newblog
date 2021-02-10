@@ -99,6 +99,32 @@
           </ul>
         </form>
       </div>
+
+      <div class="card-exp-sales">
+        <h3>Padam Jualan</h3>
+        <table id="expenses">
+                <tr>
+                    <th>Tarikh</th>
+                    <th>Jumlah</th>
+                    <th>Padam</th>
+                </tr>
+          @foreach ($salesall as $item)
+                <tr>
+                    <td>{{$item->sales_date}}</td>
+                    <td>{{$item->sales_amount}}</td>
+                    <td>
+                      <form action="{{ route('sal.del', $item->sales_date)}}" method="POST">
+                        @csrf
+                        <button class="btn btn-danger" type="submit">Padam</button>
+                        
+                      </form>
+                    </td>
+                </tr>                            
+          @endforeach
+          
+      </table>
+    </div>
+
     </div>
   </main>
 

@@ -164,6 +164,7 @@ Route::post('/expmonth/del/{id}', 'PagesController@deleteExp')->name('exp.del');
 
 Route::get('/salmonth-add', 'PagesController@showAddSales');
 Route::post('/salmonth/save', 'PagesController@addSales')->name('sal.add');
+Route::post('/salmonth/del/{id}', 'PagesController@deleteSales')->name('sal.del');
 
 
 // Route::get('/', 'EmployeeController@showEmployees');

@@ -1,4 +1,4 @@
-{{-- TEST NEW DASHBOARD --}}
+{{-- TEST NEW DASHBOARD GUNA YANG NI --}}
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -44,7 +44,7 @@
       <li class="sidenav__list-item"><a href="/dashboard">Utama</a></li>
       <li class="sidenav__list-item"><a href="/expmonth">Perbelanjaan</a></li>
       <li class="sidenav__list-item"><a href="/salmonth">Jualan</a></li>
-      <li class="sidenav__list-item"><a href="/inventori">Inventori</a></li>
+      <li class="sidenav__list-item"><a href="/inventory">Inventori</a></li>
       {{-- <li class="sidenav__list-item"><a href="/testing">Tambahan</a></li> --}}
       
     </ul>
@@ -91,19 +91,13 @@
       </div>
       
       <div class="card-dash">
-        <h3>Jualan</h3>
-        <div id="barchart2" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
-      </div>
-      
-      {{-- <div class="card-dash">
-        <h3>Perbelanjaan & Jualan</h3>
-      </div> --}}
-
-      <div class="card-dash">
         <h3>Inventori</h3>
         <div id="piechart" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
       </div>
-    
+      <div class="card-dash">
+        <h3>Jualan</h3>
+        <div id="barchart2" style="width: 80%; height: 450px; display: block; margin: auto;"></div>
+      </div>
     </div>
   </main>
 

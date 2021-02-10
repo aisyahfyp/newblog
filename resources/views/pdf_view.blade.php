@@ -24,20 +24,39 @@
         {{-- <th scope="col" style="text-align:center">Item Kategori</th> --}}
         <th scope="col" style="text-align:center">Harga</th>
         <th scope="col" style="text-align:center">Kuantiti</th>
-        {{-- <th scope="col" style="text-align:center">Jumlah</th> --}}
+        <th scope="col" style="text-align:center">Jumlah Harga</th>
       </tr>
+        <div style="display: none">
+          {{ $sum = 0 }}
+        </div>
       </thead>
       <tbody>
-        @foreach ($inventory as $item)
-        <tr>
-            {{-- <td>{{$item->stock_ID}}</td> --}}
+
+      {{-- @foreach($inventory as $category_id => $category_name)
+        Category ID: {{ $category_id }}
+        @foreach($category_name as $item)
+          <tr>
             <td style="text-align:center">{{$item->stock_name}}</td>
-            {{-- <td style="text-align:center">{{$item->stock_category}}</td> --}}
             <td style="text-align:center">{{$item->stock_price}}</td>
             <td style="text-align:center">{{$item->stock_quantity}}</td>
-            {{-- <td style="text-align:center">{{$item->stock_totalamount}}</td> --}}
+            <td style="text-align:center">{{$item->total_stock}}</td>
+            
         </tr>
         @endforeach
+      @endforeach --}}
+        @foreach ($inventory as $item)
+        <tr>
+            <td style="text-align:center">{{$item->stock_name}}</td>
+            <td style="text-align:center">{{$item->stock_price}}</td>
+            <td style="text-align:center">{{$item->stock_quantity}}</td>
+            <td style="text-align:center">{{$item->total_stock}}</td>
+            <div style="display: none">{{$sum += $item->total_stock}}</div>
+        </tr>
+        @endforeach
+        <tr>
+          <th colspan="3" style="text-align:center">Jumlah Perbelanjaan</th>
+          <td style="text-align:center">{{$sum}}</td>
+        </tr>
       </tbody>
     </table>
   </body>

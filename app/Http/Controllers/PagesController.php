@@ -107,7 +107,10 @@ class PagesController extends Controller
     }
 
     public function showAddSales(){
-        return view('layout.addSales');
+        $salesall = DB::table("sales")
+                ->whereDate('sales_date', '>', Carbon::now()->subDays(30))
+                ->get();
+        return view('layout.addSales', compact('salesall'));
     }
 
     public function addExp(Request $request){
@@ -160,6 +163,15 @@ class PagesController extends Controller
         $sales->sales_amount = $request->input('sales_amount');
         $sales->save();
         return redirect('/salmonth-add')->with('success', 'Jualan Direkodkan!');
+    }
+
+    public function deleteSales($sales_date)
+    {
+        $sales = Sales::where('sales_date', '=', $sales_date);
+       // $expenses = DB::table('expenses')->find($expenses_date);
+        //$expenses = DB::table('expenses')->where('expenses_date', $expenses_date)->find($expenses_date);
+        $sales->delete();
+        return redirect('/salmonth-add')->with('success', 'Jualan Dipadam!');
     }
 
     public function allExpenses(){

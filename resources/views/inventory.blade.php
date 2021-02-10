@@ -52,7 +52,7 @@
                         <th>Harga</th>
                         {{-- <th>Kategori</th> --}}
                         <th>Kuantiti</th>
-                        {{-- <th>Jumlah</th> --}}
+                        <th>Jumlah Harga</th>
                     </tr>
                 
                 @foreach ($inventory as $item)
@@ -62,7 +62,7 @@
                         <td>{{$item->stock_price}}</td>
                         {{-- <td>{{$item->stock_category}}</td> --}}
                         <td>{{$item->stock_quantity}}</td>
-                        {{-- <td>{{$item->stock_totalamount}}</td> --}}
+                        <td>{{$item->total_stock}}</td>
                         {{-- <td>{{$item->quantity}}</td>
                         <td>{{$item->price}}</td> --}}
                     </tr>                            
