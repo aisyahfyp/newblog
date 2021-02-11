@@ -18,45 +18,21 @@
 
 <link rel="stylesheet" type="text/css" href="css/app2.css">
 
- <div class="grid-container">
+ {{-- <div class="grid-container">
    <div class="menu-icon">
     <i class="fas fa-bars header__menu"></i>
-  </div>
+  </div> --}}
    
-  <header class="header">
+  {{-- <header class="header">
     <div class="header__search">SISTEM LAPORAN PERBELANJAAN</div>
     <div class="header__avatar">
       <a href="/logout">Log Keluar</a>
     </div>
-  </header>
-
-  <aside class="sidenav">
-    <div class="sidenav__close-icon">
-      <i class="fas fa-times sidenav__brand-close"></i>
-    </div>
-     {{-- {{ Auth::user()->username }} --}}
-    <ul class="sidenav__list">
-        {{-- @foreach($username as $users)
-        <p>Hai, {{ $users->username }}</p>
-        @endforeach --}}
-      {{-- <p>Hai, {{ Auth::user() }}</p> --}}
-      {{-- <li class="sidenav__list-item">Hai, {{$user}}</li> --}}
-      <li class="sidenav__list-item"><a href="/dashboard">Utama</a></li>
-      <li class="sidenav__list-item"><a href="/expmonth">Perbelanjaan</a></li>
-      <li class="sidenav__list-item"><a href="/salmonth">Jualan</a></li>
-      <li class="sidenav__list-item"><a href="/inventory">Inventori</a></li>
-      {{-- <li class="sidenav__list-item"><a href="/testing">Tambahan</a></li> --}}
-      
-    </ul>
-  </aside>
+  </header> --}}
 
   <main class="main">
-    {{-- <div class="main-header">
-      <div class="main-header__heading">Hello User</div>
-      <div class="main-header__updates">Recent Items</div>
-    </div> --}}
 
-    <div class="main-overview">
+    <div class="main-overview-webview">
       <div class="overviewcard-expdash">
         <div class="overviewcard__icon">Perbelanjaan</div>
         <div class="overviewcard__info">
@@ -80,7 +56,7 @@
       
     </div>
 
-    <div class="main-cards">
+    <div class="main-cards-webview">
       <div class="card-dash">
         <h3>Perbelanjaan</h3>
           {{-- <div class="chart has-fixed-height" id="bars_basic"></div> --}}

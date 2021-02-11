@@ -176,6 +176,41 @@ class ChartController extends Controller
                 ->with('sample',json_encode($result));
     }
 
+    ///WEBVIEW///
+    public function webview(){
+
+      $sumExp["sum"] = Expenses::whereYear('expenses_date', '2021')->get()->sum("expenses_amount");
+      $sumSales["sum"] = Sales::whereYear('sales_date', '2021')->get()->sum("sales_amount");
+
+      $inventory = Inventory::query()
+       ->select([
+         'stock_category.category_name',
+         'stock_category.category_id',
+         'inventory.stock_quantity',
+          DB::raw('sum(stock_quantity) as stock_quantity')
+        ])
+        //->sum('stock_quantity')
+        ->leftJoin('stock_category', 'inventory.category_id', '=', 'stock_category.category_id')
+        ->groupBy('stock_category.category_name')
+        ->get();
+    
+    $data = DB::table("expenses")
+            ->whereDate('expenses_date', '>', Carbon::now()->subDays(30))
+            ->get();
+    
+    $data2 = DB::table("sales")
+            ->whereDate('sales_date', '>', Carbon::now()->subDays(30))
+            ->get();
+
+      $getMonth = [];
+        foreach (range(1, 12) as $m) {
+            $getMonth[] = date('m - F', mktime(0, 0, 0, $m, 1));
+            $expenses = Expenses::query()
+              ->whereMonth('expenses_date', $m )
+              ->get();
+        }
+      return view('layout.webview', compact('sumExp', 'sumSales', 'inventory', 'data2', 'data'));
+    }
     
 }
 

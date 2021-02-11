@@ -14,7 +14,7 @@
   </div>
    
   <header class="header">
-    <div class="header__search">SISTEM LAPORAN PERBELANJAAN</div>
+    <div class="header__search">INVENTORI</div>
     
   </header>
 

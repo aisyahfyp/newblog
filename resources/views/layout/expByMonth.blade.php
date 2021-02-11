@@ -122,14 +122,14 @@
             <a href="expdf12">Cetak</a>
         </div>
       </div>
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Tambah Perbelanjaan</div>
+      <div class="overviewcard-exp1">
+        <div class="overviewcard__icon">Urus Perbelanjaan</div>
         <div class="overviewcard__info">
-            <a href="/expmonth-add">Tambah</a>
+            <a href="/expmonth-add">Urus</a>
         </div>
       </div>
 
-      <div class="overviewcard">
+      <div class="overviewcard-exp2">
         <div class="overviewcard__icon">Perbelanjaan 2020</div>
         <div class="overviewcard__info">
             <a href="/expdfyear">Cetak</a>

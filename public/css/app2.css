@@ -126,6 +126,14 @@ body {
     grid-gap: 20px;
     margin: 20px;
   }
+
+  .main-overview-webview {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
+    grid-auto-rows: 94px;
+    grid-gap: 20px;
+    margin: 5px;
+  }
   
   .overviewcard {
     display: flex;
@@ -135,16 +143,85 @@ body {
     background-color: #d3d3;
   }
 
-  .overviewcard__info a{
+  .overviewcard-sal1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(64, 214, 51, 0.479);
+  }
+
+  .overviewcard-sal2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(51, 214, 179, 0.479);
+  }
+
+  .overviewcard-exp1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(64, 214, 51, 0.479);
+  }
+
+  .overviewcard-exp2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(51, 214, 179, 0.479);
+  }
+
+  .overviewcard-expdash {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(238, 220, 54, 0.678);
+  }
+
+  .overviewcard-saldash {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgba(226, 72, 72, 0.678);
+  }
+
+  /* .overviewcard__info a{
     text-decoration: none;
     display: block;
     padding: 5px;
+    border: 2px solid #6ea0ce;
+  } */
+
+  .overviewcard__info a:link, a:visited {
+    color: white;
+    border: 2px solid #6ea0ce;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .overviewcard__info a:hover, a:active {
+    background-color: #6ea0ce;
+    color: black;
   }
   
   .main-cards {
     column-count: 1;
     column-gap: 20px;
     margin: 20px;
+  }
+
+  .main-cards-webview {
+    column-count: 1;
+    column-gap: 20px;
+    margin: 5px;
   }
   
   .main-cards-exp-sales {
@@ -482,6 +559,10 @@ padding: 0.5em;
   @media only screen and (min-width: 65.625em) {
     /* Break out main cards into two columns */
     .main-cards {
+      column-count: 2;
+    }
+
+    .main-cards-webview {
       column-count: 2;
     }
 

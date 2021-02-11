@@ -13,10 +13,9 @@
 
       <h1 style="font-size:30px; text-align:center">RSS Delek Frozen Food</h1>
       <hr>
-      <p style="font-size:15px; text-align:center">Inventori</p>
+      <h2 style="font-size:20px; text-align:center">Inventori</h2>
 
     <table class="table table-bordered">
-
     <thead class="thead-dark">
       <tr>
         {{-- <td>Item ID</td> --}}
@@ -54,10 +53,46 @@
         </tr>
         @endforeach
         <tr>
-          <th colspan="3" style="text-align:center">Jumlah Perbelanjaan</th>
+          <th colspan="3" style="text-align:center">Jumlah Harga</th>
           <td style="text-align:center">{{$sum}}</td>
         </tr>
       </tbody>
     </table>
-  </body>
+
+    {{-- TABLE 2 --}}
+
+    <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        {{-- <td>Item ID</td> --}}
+        <th scope="col" style="text-align:center">Kategori</th>
+        <th scope="col" style="text-align:center">Jumlah Harga</th>
+      </tr>
+        <div style="display: none">
+          {{ $sum = 0 }}
+        </div>
+      </thead>
+      <tbody>
+        @foreach ($inventory2 as $item)
+        <tr>
+            <td style="text-align:center">{{$item->id}}</td>
+            <td style="text-align:center">{{$item->total_amount}}</td>
+            <div style="display: none">{{$sum += $item->total_amount}}</div>
+        </tr>
+        @endforeach
+        <tr>
+          <th colspan="1" style="text-align:center">Jumlah Harga</th>
+          <td style="text-align:center">{{$sum}}</td>
+        </tr>
+      </tbody>
+    </table>
+      <p style="font-size:17px;">Jenis Kategori : </p>
+      <dl>
+        <dt>1 - Sayur</dt>
+        <dt>2 - Daging</dt>
+        <dt>3 - Rempah</dt>
+        <dt>4 - Keringan</dt>
+        <dt>5 - Lain-lain</dt>
+      </dl>
+      </body>
 </html>

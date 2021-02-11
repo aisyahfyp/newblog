@@ -51,5 +51,41 @@
 	
   </tbody>
 </table>
+
+  {{-- TABLE 2 --}}
+
+  <table class="table table-bordered">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col" style="text-align:center">Kategori</th>
+      <th scope="col" style="text-align:center">Jumlah</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+      <div style="display: none">
+          {{ $sum = 0 }}
+      </div>
+
+        @foreach ($expenses2 as $item)
+    <tr>
+      <td style="text-align:center">{{$item->id}}</td>
+      <td style="text-align:center">{{$item->total_amount}}</td>
+      <div style="display: none">{{$sum += $item->total_amount}}</div>
+
+    </tr>
+      @endforeach
+    <tr>
+      <th colspan="1" style="text-align:center">Jumlah Perbelanjaan</th>
+      <td style="text-align:center">{{$sum}}</td>
+    </tr>
+  </tbody>
+  </table>
+  <p style="font-size:17px;">Jenis Kategori : </p>
+      <dl>
+        <dt>1 - Gaji Pekerja</dt>
+        <dt>2 - Utiliti</dt>
+        <dt>3 - Pelbagai</dt>
+      </dl>
   </body>
 </html>

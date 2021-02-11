@@ -122,13 +122,13 @@
             <a href="/salpdf12">Cetak</a>
         </div>
       </div>
-      <div class="overviewcard">
-        <div class="overviewcard__icon">Tambah Jualan</div>
+      <div class="overviewcard-sal1">
+        <div class="overviewcard__icon">Urus Jualan</div>
         <div class="overviewcard__info">
-            <a href="/salmonth-add">Tambah</a>
+            <a href="/salmonth-add">Urus</a>
         </div>
       </div>
-      <div class="overviewcard">
+      <div class="overviewcard-sal2">
         <div class="overviewcard__icon">Jualan 2020</div>
         <div class="overviewcard__info">
             <a href="/salpdfyear">Cetak</a>
