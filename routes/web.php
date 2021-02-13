@@ -166,27 +166,4 @@ Route::get('/salmonth-add', 'PagesController@showAddSales');
 Route::post('/salmonth/save', 'PagesController@addSales')->name('sal.add');
 Route::post('/salmonth/del/{id}', 'PagesController@deleteSales')->name('sal.del');
 
-
-// Route::get('/', 'EmployeeController@showEmployees');
-
-
-// Route::get('/inventory', function () {
-//     return view('inventory');
-// });
-
-// Route::view('/dashboard', 'dashboard');
-// Route::get('/dashboard', 'PagesController@welcome');
-// Route::view('login', 'login');
-// Route::post('login', 'LoginController@login');
-// Route::group(['middleware' => ['authenticate', 'roles']], function (){
-//     Route::get('/dashboard', 'PagesController@dashboard')->name('dashboard');
-// });
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::get('/test', function(){
-//     Artisan::call('migrate');
-//     Artisan::call('db:seed');
-// });
-
 ?>
